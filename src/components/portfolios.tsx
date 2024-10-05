@@ -178,7 +178,7 @@ export function Portfolios() {
           </nav>
           <div className="flex items-center gap-4">
             <Link
-              href="https://medium.com/@aaronng.dev_71714"
+              href="https://medium.com/@masonguyen13"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors"
@@ -226,8 +226,9 @@ export function Portfolios() {
               <h1 className="text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">Mason Nguyen</h1>
               <h2 className="text-2xl font-medium text-gray-600 dark:text-gray-400 mb-8">Data Analyst</h2>
               <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                Passionate data science professional specializing in finance. Leveraging machine learning, 
-                statistics, and programming to drive data-informed business decisions and innovative solutions.
+              Data analyst by day, AI visionary by night. I decode business insights from digital noise and craft AI solutions that bridge tech and human needs. 
+              Here, I share my journey through the data landscape, exploring how it can revolutionise our daily tech interactions. 
+              Expect deep dives into data analysis, machine learning breakthroughs, and thought experiments on the future of AI.
               </p>
             </div>
           </motion.div>
@@ -238,9 +239,9 @@ export function Portfolios() {
             <h2 className="text-3xl font-bold mb-12">Technical Skills</h2>
             <div className="space-y-8">
               {[
-                { title: "Programming", skills: "Python, PySpark, PHP, C++, Javascript, Typescript, HTML/CSS, SQL, NoSQL", level: 90 },
-                { title: "Frameworks", skills: "Scikit-Learn, TensorFlow, Pytorch, Optuna, Ray, Lumen, Dash, Svelte, React, XGBoost", level: 85 },
-                { title: "Data Management", skills: "Oracle, MySQL, MongoDB, Hadoop, Hive, ETL, Feature Engineering", level: 80 },
+                { title: "Programming", skills: "Python, Javascript, Typescript, HTML/CSS, SQL, NoSQL", level: 90 },
+                { title: "Frameworks", skills: "Scikit-Learn, TensorFlow, Pytorch, Dash, React, XGBoost", level: 85 },
+                { title: "Data Management", skills: "Oracle, MySQL, MongoDB, ETL, Feature Engineering", level: 80 },
                 { title: "Machine Learning", skills: "Classification, Regression, Clustering, Deep Learning, Multi-Agent Systems", level: 95 },
                 { title: "Cloud Computing", skills: "Microsoft Azure (SQL, Machine Learning, Blob Storage), AWS (S3)", level: 75 },
                 { title: "Data Analysis", skills: "EDA, Quantitative Analysis, Time-Series Analysis, Plotly, Power BI, Excel", level: 90 },
