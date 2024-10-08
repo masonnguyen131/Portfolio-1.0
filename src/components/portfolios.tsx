@@ -237,19 +237,26 @@ export function Portfolios() {
   </motion.div>
 </header>
       <main className="flex-1">
-      <section id="about" className="py-24 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+      <section id="about" className="py-24 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 relative">
+  <div 
+    className="absolute inset-0 bg-cover bg-center z-0" 
+    style={{ backgroundImage: "url('/Wall.jpg')" }}
+  ></div>
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="container mx-auto max-w-3xl px-4 sm:px-6 text-center"
+    className="container mx-auto max-w-3xl px-4 sm:px-6 text-center relative z-10"
   >
-    <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
+    <h1 className="text-5xl font-bold mb-4" style={{ color: 'white' }}>
       Mason Nguyen
     </h1>
-    <h2 className="text-2xl font-medium text-gray-600 dark:text-gray-400 mb-8">Data Analyst</h2>
+    <h2 className="text-2xl font-medium mb-8" style={{ color: 'white' }}>
+      Data Analyst
+    </h2>
     <motion.p 
-      className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
+      className="text-lg leading-relaxed bg-black bg-opacity-50 p-6 rounded-lg"
+      style={{ color: 'white' }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.5, duration: 0.5 }}
