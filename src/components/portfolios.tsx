@@ -125,9 +125,16 @@ function WebcamIcon(props: SVGProps<SVGSVGElement>) {
 }
 
 
+import { CodeIcon, FrameIcon, DatabaseIcon, BrainIcon, CloudIcon, BarChartIcon, DollarSignIcon, HomeIcon, UsersIcon } from "lucide-react";
+
 export function Portfolios() {
   const [activeSection, setActiveSection] = useState("");
   const { theme, setTheme } = useTheme();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -148,34 +155,49 @@ export function Portfolios() {
     return () => observer.disconnect();
   }, []);
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent("Contact from Portfolio Website");
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage: ${formData.message}`);
+    window.location.href = `mailto:masonnguyen131@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-200">
-      <header className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 transition-all duration-200">
-        <motion.div
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="container mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6"
+     <header className="sticky top-0 z-50 backdrop-blur-md bg-white/30 dark:bg-gray-900/30 transition-all duration-200">
+  <motion.div
+    initial={{ y: -100 }}
+    animate={{ y: 0 }}
+    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+    className="container mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6"
+  >
+    <Link href="#" prefetch={false} className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
+      Mason Nguyen
+    </Link>
+    <nav className="hidden space-x-6 md:flex">
+      {["About", "Skills", "Projects", "Blogs"].map((item) => (
+        <Link
+          key={item}
+          href={`#${item.toLowerCase()}`}
+          className={`text-sm font-medium transition-colors ${
+            activeSection === item.toLowerCase()
+              ? "text-blue-500 dark:text-purple-400"
+              : "text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-purple-400"
+          }`}
+          prefetch={false}
         >
-          <Link href="#" prefetch={false}>
-            <span className="text-xl font-semibold text-gray-800 dark:text-gray-200">Mason Nguyen</span>
-          </Link>
-          <nav className="hidden space-x-6 md:flex">
-            {["About", "Skills", "Projects", "Blogs"].map((item) => (
-              <Link
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className={`text-sm font-medium transition-colors ${
-                  activeSection === item.toLowerCase()
-                    ? "text-blue-600"
-                    : "text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
-                }`}
-                prefetch={false}
-              >
-                {item}
-              </Link>
-            ))}
-          </nav>
+          {item}
+        </Link>
+      ))}
+    </nav>
           <div className="flex items-center gap-4">
             <Link
               href="https://medium.com/@masonguyen13"
@@ -205,160 +227,194 @@ export function Portfolios() {
               <GithubIcon className="h-5 w-5" />
             </Link>
             <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
-          </div>
-        </motion.div>
-      </header>
+        variant="ghost"
+        size="icon"
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      >
+        {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+      </Button>
+    </div>
+  </motion.div>
+</header>
       <main className="flex-1">
-        <section id="about" className="py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="container mx-auto max-w-3xl px-4 sm:px-6"
+      <section id="about" className="py-24 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800">
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="container mx-auto max-w-3xl px-4 sm:px-6 text-center"
+  >
+    <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">
+      Mason Nguyen
+    </h1>
+    <h2 className="text-2xl font-medium text-gray-600 dark:text-gray-400 mb-8">Data Analyst</h2>
+    <motion.p 
+      className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5, duration: 0.5 }}
+    >
+      Data analyst by day, AI visionary by night. I decode business insights from digital noise and craft AI solutions that bridge tech and human needs. 
+      Here, I share my journey through the data landscape, exploring how it can revolutionise our daily tech interactions. 
+      Expect deep dives into data analysis, machine learning breakthroughs, and thought experiments on the future of AI.
+    </motion.p>
+  </motion.div>
+</section>
+        <Separator className="max-w-3xl mx-auto" />
+        <section id="skills" className="py-24 bg-white dark:bg-gray-900">
+  <div className="container mx-auto max-w-4xl px-4 sm:px-6">
+    <h2 className="text-3xl font-bold mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">Technical Skills</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {[
+        { title: "Programming", skills: "Python, Javascript, Typescript, HTML/CSS, SQL, NoSQL", icon: <CodeIcon className="h-8 w-8 text-blue-500" /> },
+        { title: "Frameworks", skills: "Scikit-Learn, TensorFlow, Pytorch, Dash, React, XGBoost", icon: <FrameIcon className="h-8 w-8 text-purple-500" /> },
+        { title: "Data Management", skills: "Oracle, MySQL, MongoDB, ETL, Feature Engineering", icon: <DatabaseIcon className="h-8 w-8 text-green-500" /> },
+        { title: "Machine Learning", skills: "Classification, Regression, Clustering, Deep Learning, Multi-Agent Systems", icon: <BrainIcon className="h-8 w-8 text-red-500" /> },
+        { title: "Cloud Computing", skills: "Microsoft Azure (SQL, Machine Learning, Blob Storage), AWS (S3)", icon: <CloudIcon className="h-8 w-8 text-blue-400" /> },
+        { title: "Data Analysis", skills: "EDA, Quantitative Analysis, Time-Series Analysis, Plotly, Power BI, Excel", icon: <BarChartIcon className="h-8 w-8 text-yellow-500" /> },
+      ].map((category, index) => (
+        <motion.div
+          key={category.title}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md"
+        >
+          <div className="flex items-center mb-4">
+            {category.icon}
+            <h3 className="text-xl font-semibold ml-4 text-gray-800 dark:text-gray-200">{category.title}</h3>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400">{category.skills}</p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+        <Separator className="max-w-3xl mx-auto" />
+        <section id="projects" className="py-24 bg-gray-50 dark:bg-gray-800">
+  <div className="container mx-auto max-w-4xl px-4 sm:px-6">
+    <h2 className="text-3xl font-bold mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">Featured Projects</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {[
+        {
+          title: "Capital Vision",
+          description: "A Financial Analysis Platform that scrapes and analyzes financial data, enhancing user decision-making by providing actionable insights.",
+          link: "https://capital-vision-dev-8f1401efbadb.herokuapp.com/",
+          icon: <DollarSignIcon className="h-8 w-8 text-green-500" />
+        },
+        {
+          title: "Predict Housing Price",
+          description: "A data science project focused on predicting housing prices using advanced machine learning techniques.",
+          link: "https://github.com/tienphatnguyendev/housing_price_prediction/blob/main/Housing%20Price%20Prediction.ipynb",
+          icon: <HomeIcon className="h-8 w-8 text-blue-500" />
+        },
+        {
+          title: "Bank Churn Classification",
+          description: "A data science project aimed at predicting bank customer churn through extensive EDA and machine learning models.",
+          link: "https://github.com/tienphatnguyendev/bank-churn-classification",
+          icon: <UsersIcon className="h-8 w-8 text-purple-500" />
+        }
+      ].map((project, index) => (
+        <motion.div
+          key={index}
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 300 }}
+        >
+          <Link
+            href={project.link}
+            className="block group bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+            prefetch={false}
           >
-            <div className="text-center">
-              <h1 className="text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">Mason Nguyen</h1>
-              <h2 className="text-2xl font-medium text-gray-600 dark:text-gray-400 mb-8">Data Analyst</h2>
-              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              Data analyst by day, AI visionary by night. I decode business insights from digital noise and craft AI solutions that bridge tech and human needs. 
-              Here, I share my journey through the data landscape, exploring how it can revolutionise our daily tech interactions. 
-              Expect deep dives into data analysis, machine learning breakthroughs, and thought experiments on the future of AI.
-              </p>
+            <div className="flex items-center mb-4">
+              {project.icon}
+              <h3 className="text-xl font-semibold ml-4 text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{project.title}</h3>
             </div>
-          </motion.div>
-        </section>
-        <Separator className="max-w-3xl mx-auto" />
-        <section id="skills" className="py-24">
-          <div className="container mx-auto max-w-3xl px-4 sm:px-6">
-            <h2 className="text-3xl font-bold mb-12">Technical Skills</h2>
-            <div className="space-y-8">
-              {[
-                { title: "Programming", skills: "Python, Javascript, Typescript, HTML/CSS, SQL, NoSQL", level: 90 },
-                { title: "Frameworks", skills: "Scikit-Learn, TensorFlow, Pytorch, Dash, React, XGBoost", level: 85 },
-                { title: "Data Management", skills: "Oracle, MySQL, MongoDB, ETL, Feature Engineering", level: 80 },
-                { title: "Machine Learning", skills: "Classification, Regression, Clustering, Deep Learning, Multi-Agent Systems", level: 95 },
-                { title: "Cloud Computing", skills: "Microsoft Azure (SQL, Machine Learning, Blob Storage), AWS (S3)", level: 75 },
-                { title: "Data Analysis", skills: "EDA, Quantitative Analysis, Time-Series Analysis, Plotly, Power BI, Excel", level: 90 },
-              ].map((category, index) => (
-                <motion.div
-                  key={category.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200">{category.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-2">{category.skills}</p>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                    <motion.div
-                      className="bg-blue-600 h-2.5 rounded-full"
-                      initial={{ width: 0 }}
-                      animate={{ width: `${category.level}%` }}
-                      transition={{ duration: 1, delay: index * 0.1 }}
-                    />
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-        <Separator className="max-w-3xl mx-auto" />
-        <section id="projects" className="py-24">
-          <div className="container mx-auto max-w-3xl px-4 sm:px-6">
-            <h2 className="text-3xl font-bold mb-12">Featured Projects</h2>
-            <div className="space-y-12">
-              {[
-                {
-                  title: "Capital Vision",
-                  description: "A Financial Analysis Platform that scrapes and analyzes financial data, enhancing user decision-making by providing actionable insights.",
-                  link: "https://capital-vision-dev-8f1401efbadb.herokuapp.com/"
-                },
-                {
-                  title: "Predict Housing Price",
-                  description: "A data science project focused on predicting housing prices using advanced machine learning techniques.",
-                  link: "https://github.com/tienphatnguyendev/housing_price_prediction/blob/main/Housing%20Price%20Prediction.ipynb"
-                },
-                {
-                  title: "Bank Churn Classification",
-                  description: "A data science project aimed at predicting bank customer churn through extensive EDA and machine learning models.",
-                  link: "https://github.com/tienphatnguyendev/bank-churn-classification"
-                }
-              ].map((project, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Link
-                    href={project.link}
-                    className="block group bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
-                    prefetch={false}
-                  >
-                    <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{project.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400">{project.description}</p>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-        <Separator className="max-w-3xl mx-auto" />
-        <section id="blogs" className="py-24">
-          <div className="container mx-auto max-w-3xl px-4 sm:px-6">
-            <h2 className="text-3xl font-bold mb-12">Latest Insights</h2>
-            <div className="space-y-8">
-              {[
-                {
-                  title: "Feature Engineering Series: Episode 1",
-                  description: "Normalization, Discretization, and Outliers",
-                  link: "https://medium.com/@aaronng.dev_71714/mastering-feature-engineering-normalization-discretization-and-outliers-81b03b8c3ae5"
-                },
-                {
-                  title: "Feature Engineering Series: Episode 2",
-                  description: "Mastering Feature Expansion: Computable Features, Imputation, and Kernels",
-                  link: "https://medium.com/@aaronng.dev_71714/feature-engineering-series-episode-2-mastering-feature-expansion-computable-features-48d16fd2e484"
-                },
-                {
-                  title: "Optimizing Neural Networks",
-                  description: "Hyperparameter Tuning Using Keras and Scikit-Learn",
-                  link: "https://medium.com/@aaronng.dev_71714/optimizing-neural-networks-with-hyperparameter-tuning-using-keras-and-scikit-learn-e6cc87c0e0cf"
-                }
-              ].map((blog, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Link
-                    href={blog.link}
-                    className="block group"
-                    prefetch={false}
-                  >
-                    <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{blog.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400">{blog.description}</p>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+            <p className="text-gray-600 dark:text-gray-400">{project.description}</p>
+          </Link>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section id="blogs" className="py-24 bg-white dark:bg-gray-900">
+  <div className="container mx-auto max-w-4xl px-4 sm:px-6">
+    <h2 className="text-3xl font-bold mb-12 text-center bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">Latest Insights</h2>
+    <div className="space-y-8">
+      {[
+        {
+          title: "Feature Engineering Series: Episode 1",
+          description: "Normalization, Discretization, and Outliers",
+          link: "https://medium.com/@aaronng.dev_71714/mastering-feature-engineering-normalization-discretization-and-outliers-81b03b8c3ae5"
+        },
+        {
+          title: "Feature Engineering Series: Episode 2",
+          description: "Mastering Feature Expansion: Computable Features, Imputation, and Kernels",
+          link: "https://medium.com/@aaronng.dev_71714/feature-engineering-series-episode-2-mastering-feature-expansion-computable-features-48d16fd2e484"
+        },
+        {
+          title: "Optimizing Neural Networks",
+          description: "Hyperparameter Tuning Using Keras and Scikit-Learn",
+          link: "https://medium.com/@aaronng.dev_71714/optimizing-neural-networks-with-hyperparameter-tuning-using-keras-and-scikit-learn-e6cc87c0e0cf"
+        }
+      ].map((blog, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+        >
+          <Link
+            href={blog.link}
+            className="block group bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+            prefetch={false}
+          >
+            <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{blog.title}</h3>
+            <p className="text-gray-600 dark:text-gray-400">{blog.description}</p>
+          </Link>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
       </main>
       <footer className="bg-gray-900 dark:bg-gray-800 text-white py-12">
         <div className="container mx-auto max-w-5xl px-4 sm:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p>&copy; 2023 Mason Nguyen</p>
+            <p className="text-gray-400">&copy; 2024 Mason Nguyen</p>
             <div className="flex items-center gap-4 mt-4 md:mt-0">
+              <Link
+                href="https://medium.com/@masonguyen13"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+                prefetch={false}
+              >
+                <TwitterIcon className="h-5 w-5" />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/masonnguyen1311/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+                prefetch={false}
+              >
+                <LinkedinIcon className="h-5 w-5" />
+              </Link>
+              <Link
+                href="https://github.com/masonnguyen131"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+                prefetch={false}
+              >
+                <GithubIcon className="h-5 w-5" />
+              </Link>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
                     variant="ghost"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-gray-400 hover:text-white transition-colors"
                   >
                     <MailIcon className="h-5 w-5" />
                   </Button>
@@ -370,25 +426,44 @@ export function Portfolios() {
                       Feel free to reach out with any questions or inquiries.
                     </DialogDescription>
                   </DialogHeader>
-                  <form onSubmit={(e) => e.preventDefault()}>
+                  <form onSubmit={handleSubmit}>
                     <div className="grid gap-4 py-4">
                       <div className="grid grid-cols-4 items-center gap-4">
                         <label htmlFor="name" className="text-right">
                           Name
                         </label>
-                        <Input id="name" className="col-span-3" />
+                        <Input
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          className="col-span-3"
+                        />
                       </div>
                       <div className="grid grid-cols-4 items-center gap-4">
                         <label htmlFor="email" className="text-right">
                           Email
                         </label>
-                        <Input id="email" type="email" className="col-span-3" />
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className="col-span-3"
+                        />
                       </div>
                       <div className="grid grid-cols-4 items-center gap-4">
                         <label htmlFor="message" className="text-right">
                           Message
                         </label>
-                        <Textarea id="message" className="col-span-3" />
+                        <Textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          className="col-span-3"
+                        />
                       </div>
                     </div>
                     <DialogFooter>
